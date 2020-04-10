@@ -12,42 +12,6 @@
 #include "opencv2/opencv.hpp"
 
 
-#include <gym_cpp/Net/PolicyNet.hpp>
-class testPolicyNet : public PolicyNet{
-public:
-  testPolicyNet(int64_t N,int64_t M,int64_t H):
-    PolicyNet(N,M,H)
-  {
-  }
-
-  virtual void getActions(double* actions, int robotNumber) override{
-    PolicyNet::getActions( actions, robotNumber);
-    for(int i = 0 ; i< robotNumber ;i++){
-      for(int j = 0 ; j< outputSize_ ;j++){
-        if(*(actions+ outputSize_*i +j)  >0){
-          *(actions+ outputSize_*i +j)  = 1 ;
-        }else{
-          *(actions+ outputSize_*i +j)  = 0 ;
-        }
-      }
-    }
-  }
-
-  virtual void getMeanActions(double* actions, int robotNumber) override{
-    PolicyNet::getMeanActions( actions, robotNumber);
-    for(int i = 0 ; i< robotNumber ;i++){
-      for(int j = 0 ; j< outputSize_ ;j++){
-        if(*(actions+ outputSize_*i +j)  >0){
-          *(actions+ outputSize_*i +j)  = 1 ;
-        }else{
-          *(actions+ outputSize_*i +j)  = 0 ;
-        }
-      }
-    }
-  }
-
-};
-
 namespace gym{
   class CartPoleEnvironment:public Environment{
     public:
