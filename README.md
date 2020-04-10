@@ -6,4 +6,4 @@ In order to unleash full power of Cpp, the environments are also implemented usi
 Cpu parallelization.
 
 
-Move will come soon.
+More is coming soon.
