@@ -80,15 +80,18 @@ namespace gym{
       }
 
       void render() override{
-        cv::Mat img(500, 500, CV_8UC3, cv::Scalar(255, 255, 255));
-        cv::Point edge = cv::Point(l_*sin(th_)/6*500+250, 250-l_*cos(th_)/4*500 );
-        cv::line(img, cv::Point(250, 250), edge, cv::Scalar(76.5,76.5,204.), 22, 8, 0 );
-        cv::circle(img, cv::Point(250, 250),5, cv::Scalar(0,0,0),CV_FILLED, 8,0);
+        image_ = cv::Mat(640, 640, CV_8UC3, cv::Scalar(255, 255, 255));
+        cv::Point edge = cv::Point(l_*sin(th_)/6*640+320, 320-l_*cos(th_)/4*640 );
+        cv::line(image_, cv::Point(320, 320), edge, cv::Scalar(76.5,76.5,204.), 22, 8, 0 );
+        cv::circle(image_, cv::Point(320, 320),5, cv::Scalar(0,0,0),CV_FILLED, 8,0);
 
-        cv::imshow("Pendulum-v0", img);
+        cv::imshow("Pendulum-v0", image_);
         cv::waitKey(10);
       }
 
+      cv::Mat renderVideo() override{
+        return image_;
+      }
 
       int getStateSize() override{
         return  3;
@@ -126,6 +129,7 @@ namespace gym{
 
       double step_;
 
+      cv::Mat image_;
 
   };
 }// namespace gym
